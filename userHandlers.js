@@ -85,6 +85,8 @@ const updateUser = (req, res) => {
     .then(([result]) => {
       if (result.affectedRows === 0) {
         res.status(404).send("Not Found");
+      } else if (req.payload.sub !== id) {
+        res.status(403).send("Forbidden")
       } else {
         res.sendStatus(204);
       }
@@ -103,6 +105,8 @@ const deleteUser = (req, res) => {
     .then(([result]) => {
       if (result.affectedRows === 0) {
         res.status(404).send("Not Found");
+      } else if (req.payload.sub !== id) {
+        res.status(403).send("Forbidden")
       } else {
         res.sendStatus(204);
       }
