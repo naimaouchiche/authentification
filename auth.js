@@ -9,7 +9,6 @@ const hashingOptions = {
 };
 
 const hashPassword = (req, res, next) => {
-    console.log("ttoto");
   argon2
     .hash(req.body.password, hashingOptions)
     .then((hashedPassword) => {
@@ -26,7 +25,7 @@ const hashPassword = (req, res, next) => {
 
 const verifyPassword = (req, res) => {
     argon2
-    .verify(req.user.hashedPassword, req.body.password, req.payload.sub)
+    .verify(req.user.hashedPassword, req.body.password)
     .then((isVerified) => {
         if (isVerified) {
             const payload = { sub: req.user.id };
